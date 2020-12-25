@@ -1,7 +1,6 @@
 package com.example.demo.service.impl
 
 import com.example.demo.service.ConfigurationService
-import com.example.demo.vo.GetConfigRequest
 import com.example.demo.vo.HeaterConfig
 import com.example.demo.vo.HoldTemperatureRequest
 import com.example.demo.vo.SetConfigRequest
@@ -20,7 +19,7 @@ class MainController(val configurationService: ConfigurationService) {
     private var hold = AtomicBoolean(false)
 
     @GetMapping("get/config")
-    fun getConfig(request: GetConfigRequest): HeaterConfig =
+    fun getConfig(): HeaterConfig =
             configurationService.getCurrentConfig() ?: throw Exception("Please set heater config")
 
     @PostMapping("set/config")
