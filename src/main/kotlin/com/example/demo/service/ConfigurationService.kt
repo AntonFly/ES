@@ -6,7 +6,7 @@ import com.example.demo.vo.HeaterConfig
  * @author amaltsev
  */
 interface ConfigurationService {
-    fun getConfig(heaterId: String): HeaterConfig?
+    fun getCurrentConfig(): HeaterConfig?
 
-    fun setConfig(heaterId: String, config: HeaterConfig): HeaterConfig
+    fun setConfig(config: HeaterConfig)
 }

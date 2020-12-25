@@ -2,7 +2,7 @@ package com.example.demo.service.impl
 
 import com.example.demo.vo.HeaterConfig
 import org.springframework.stereotype.Service
-import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * @author amaltsev
@@ -10,16 +10,13 @@ import java.util.concurrent.ConcurrentHashMap
 @Service("emb.configurationDao")
 class ConfigurationDao {
 
-    private val storage = ConcurrentHashMap<String, HeaterConfig>()
+    private var storage = AtomicReference<HeaterConfig>()
 
-    fun getConfig(heaterId: String): HeaterConfig {
-        return storage[heaterId] ?: throw Exception("Config not found")
+    fun getConfig(): HeaterConfig {
+        return storage.get()
     }
 
-    fun setConfig(heaterId: String, config: HeaterConfig) {
-        if(storage.contains(heaterId)) {
-            throw Exception("Config not found")
-        }
-        storage[heaterId] = config
+    fun setConfig(config: HeaterConfig) {
+        storage.set(config)
     }
 }
