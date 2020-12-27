@@ -50,7 +50,7 @@ class MainController(val configurationService: ConfigurationService) {
 
     @GetMapping("/")
     fun hello(): ResponseEntity<String?>? {
-        if (hold.get())
+        if (!hold.get())
             return ResponseEntity("$"+configurationService.getCurrentConfig()?.temperature.toString()+"$", HttpStatus.OK)
         else
             return ResponseEntity("$0.0$", HttpStatus.OK)
